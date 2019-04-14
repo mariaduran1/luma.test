@@ -1,5 +1,6 @@
 import unittest
 import time
+import HtmlTestRunner
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -9,6 +10,7 @@ from selenium.webdriver.common.keys import Keys
 
 
 class Test_Luma(unittest.TestCase):
+    
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Chrome('C:\dev1\week5\chromedriver.exe')
@@ -21,35 +23,18 @@ class Test_Luma(unittest.TestCase):
     def test_can_search(self):
 
         search_box = self.driver.find_element_by_name("q")
-        submit = self.driver.find_element_by_css_selector (".action.search")
-        #links = self.driver.find_elements_by_css_selector("product-item-link")
-        
-
-
         search_box.send_keys("pants")
-        submit.click()
-        
+        search_box.submit()
+
         time.sleep(5)
 
-      
-    def first_result(self):
+    def test_first_result(self):
         
-        search_box = self.driver.find_element_by_name("q")
-        submit = self.driver.find_element_by_css_selector (".action.search")
         links = self.driver.find_elements_by_css_selector(".product-item-link")
-        first_result = links[0]
-        
-
-        search_box.send_keys("pants")
-        submit.click()
-        #first_result = links[0]
-        first_result.click()
+        links[0].click()
 
         time.sleep(5)
 
-
-            
-        
 
         
 
@@ -57,4 +42,8 @@ class Test_Luma(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output = "./report"))
+
+
+i#f __name__ == "__main__":
+    #unittest.main()
